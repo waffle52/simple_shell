@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
