@@ -13,7 +13,7 @@ int main(void)
 	char *commandcopy, *token;
 	char delim[] = " ";
 
-	printf("$");
+	write(STDOUT_FILENO,"$",1);
 
 	getline(&command, &command_size, stdin);
 
@@ -28,7 +28,7 @@ int main(void)
 	token = strtok(commandcopy, delim);
 	while(token)
 	{
-		printf("%s", token);
+		write(STDOUT_FILENO, token, _strlen(token));
 		token = strtok(NULL, delim);
 		commandnum++;
 	}
