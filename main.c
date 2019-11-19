@@ -8,15 +8,16 @@ int main(void)
 {
 	char *command = NULL;
 	size_t command_size = 0;
-	size_t commandnum, i = 0;
+	size_t commandnum = 0, i = 0;
 	char **array;
 	char *commandcopy = NULL, *token;
 	char delim[] = " ";
+	int run = 1; /* later changed by exit() */
 
-	while(1)
+	while(run)
 	{
-		i = 0;
 		commandnum = 0;
+		command_size = 0;
 		write(STDOUT_FILENO,"$ ",2);
 
 		getline(&command, &command_size, stdin);
@@ -25,12 +26,12 @@ int main(void)
 		{
 			if (command[i] == '\n')
 				command[i] = '\0';
-		}
+				}
 
 		commandcopy = _strdup(command);
 
 		token = strtok(commandcopy, delim);
-		while(token)
+		while(token != NULL)
 		{
 			token = strtok(NULL, delim);
 			commandnum++;
