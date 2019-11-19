@@ -12,6 +12,6 @@
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
-
+int _atoi(char *s);
 
 #endif /* HEADER_H */
