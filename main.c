@@ -29,8 +29,9 @@ int main(void)
 				}
 
 		commandcopy = _strdup(command);
-
+		/*	printf("test: %s", commandcopy); */
 		token = strtok(commandcopy, delim);
+		/*	printf("test: %s", token); */
 		while(token != NULL)
 		{
 			token = strtok(NULL, delim);
@@ -39,7 +40,7 @@ int main(void)
 
 		array = malloc(sizeof(char *) * (commandnum + 1));
 
-		token = strtok(commandcopy, delim);
+		token = strtok(command, delim);
 		i = 0;
 		while (token != NULL)
 		{
@@ -48,6 +49,7 @@ int main(void)
 			i++;
 		}
 		array[i] = NULL;
+
 
 		if (fork() == 0)
 			execve(array[0], array, NULL);
