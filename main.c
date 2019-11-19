@@ -32,7 +32,6 @@ int main(void)
 		token = strtok(commandcopy, delim);
 		while(token)
 		{
-			write(STDOUT_FILENO, token, _strlen(token));
 			token = strtok(NULL, delim);
 			commandnum++;
 		}
