@@ -86,10 +86,11 @@ int _atoi(char *s)
 	return (value * sign);
 }
 
-/*void handler(int sig_num)
+void handler(int sig_num)
 {
-        write(STDOUT_FILENO, "I won't die\n", sig_num);
-	}*/
+        signal(sig_num, SIG_IGN);
+	signal(SIGINT, handler);
+}
 
 /**
  * _strcmp - Entry point
@@ -121,3 +122,4 @@ int _strcmp(char *s1, char *s2)
 
 	return (m);
 }
+

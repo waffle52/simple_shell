@@ -10,8 +10,7 @@ int main(void)
 	char delim[] = " ";
 	int status = 0;
 
-	/* (void) signal(SIGINT, SIG_IGN); */
-	/* (void) signal(SIGTERM, handler); */
+	(void) signal(SIGINT, handler);
 
 	while(1)
 	{
@@ -74,9 +73,11 @@ int main(void)
 			execve(array[0], array, NULL);
 		else
 			wait(NULL);
+
 		free(command);
 		free(commandcopy);
 		free(array);
+		fflush(stdin);
 
 		command = NULL;
 		commandcopy = NULL;
