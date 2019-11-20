@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include "header.h"
 
 int main(void)
@@ -12,10 +8,14 @@ int main(void)
 	char **array;
 	char *commandcopy = NULL, *token;
 	char delim[] = " ";
-	int run = 1; /* later changed by exit() */
+	int status = 0;
 
-	while(run)
+	/* (void) signal(SIGINT, SIG_IGN); */
+	/* (void) signal(SIGTERM, handler); */
+
+	while(1)
 	{
+
 		commandnum = 0;
 		command_size = 0;
 		write(STDOUT_FILENO,"$ ",2);
@@ -26,12 +26,12 @@ int main(void)
 		{
 			if (command[i] == '\n')
 				command[i] = '\0';
-				}
+		}
 
-		commandcopy = _strdup(command);
-		/*	printf("test: %s", commandcopy); */
+	        commandcopy = _strdup(command);
+
 		token = strtok(commandcopy, delim);
-		/*	printf("test: %s", token); */
+
 		while(token != NULL)
 		{
 			token = strtok(NULL, delim);
@@ -50,6 +50,25 @@ int main(void)
 		}
 		array[i] = NULL;
 
+		if (_strcmp("exit", array[0]) == 0)
+		{
+
+			if (array[1] != NULL)
+			{
+				status = _atoi(array[1]);
+			}
+
+			free(command);
+			free(commandcopy);
+			free(array);
+
+		        exit(status);
+		}
+
+		/*	if (_strcmp("cd", array[0]) == 0)
+		{
+
+		}*/
 
 		if (fork() == 0)
 			execve(array[0], array, NULL);
