@@ -15,6 +15,10 @@ int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
 int _atoi(char *s);
+char *_getenv(char *name);
+int _strcmp(char *s1, char *s2);
 /* void sigintHandler(int sig_num); */
+
+extern char **environ;
 
 #endif /* HEADER_H */
