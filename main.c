@@ -66,10 +66,10 @@ int main(void)
 		        exit(status);
 		}
 
-		/*	if (_strcmp("cd", array[0]) == 0)
+		if (_strcmp("cd", array[0]) == 0)
 		{
-
-		}*/
+			our_cd (array[1]);
+		}
 		array[0] = static_path(array[0], env_string);
 		if (fork() == 0)
 			execve(array[0], array, NULL);
