@@ -23,10 +23,10 @@ char *static_path(char *user_command, char *env_string)
 	char *token = NULL;
 	char *token2 = NULL;
 	char *dupe_str = NULL;
+	int i;
 
 	dupe_str = _strdup(env_string);
 	token = strtok(dupe_str, ":");
-	int i;
 
 	while (token != NULL)
 	{
