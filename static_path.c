@@ -2,55 +2,44 @@
 
 extern char **environ;
 
-char *_strcat(char *dest, char *src)
+char *cmd_cpy(char *dest, char *src, char *usr_cmd)
 {
-	int i, j, k, num;
+	int i, j;
+	char slash = '/';
 
-	i = 0;
-	while (dest[i] != '\0')
-		i++;
+	for (i = 0; src[i] != '\0'; i++)
+		dest[i] = src[i];
 
-	j = 0;
-	while (src[j] != '\0')
-		j++;
+	dest[i] = slash;
+	for (i++, j = 0; usr_cmd[j] != '\0'; j++, i++)
+		dest[i] = usr_cmd[j];
 
-	if (i < j)
-		num = j;
-	else if (i >= j)
-		num = i;
-
-	for (k = 0; k < num; k++)
-	{
-		if (num == j)
-			dest[k + num - 1] = src[k];
-		else
-			dest[k + num] = src[k];
-	}
-
+	dest[i] = '\0';
 	return (dest);
 }
 
-char *static_path(char *user_command)
+char *static_path(char *user_command, char *env_string)
 {
-	char *env_string;
-	char *token;
+	char *token = NULL;
+	char *token2 = NULL;
+	char *dupe_str = NULL;
 
-	env_string = _getenv("PATH");
-	/* Gets rid of the variable name. We only want what's inside */
-	token = strtok(env_string, "=");
-	token = strtok(NULL, "=");
+	dupe_str = _strdup(env_string);
+	token = strtok(dupe_str, ":");
+	int i;
 
-	token = strtok(env_string, ":");
 	while (token != NULL)
 	{
-		token = _strcat(token, "/");
-		token = _strcat(token, user_command);
+		token2 = malloc(sizeof(char) * (_strlen(token) + _strlen(user_command) + 1));
+		for (i = 0; i < (_strlen(token) + _strlen(user_command) + 1); i++)
+			token2[i] = '\0';
+		cmd_cpy(token2, token, user_command);
 
-		if (access(token, F_OK) == 0)
-		return (token);
+		if (access(token2, F_OK) == 0)
+			return (token2);
 
 		token = strtok(NULL, ":");
+		free(token2);
 	}
-
 	return (user_command);
 }

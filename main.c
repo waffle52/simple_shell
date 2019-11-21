@@ -9,9 +9,11 @@ int main(void)
 	char *commandcopy = NULL, *token;
 	char delim[] = " ";
 	int status = 0;
+	char *env_string = NULL;
 	/*
 	(void) signal(SIGINT, handler);
 	*/
+	env_string = _getenv("PATH");
 	while(1)
 	{
 
@@ -68,7 +70,7 @@ int main(void)
 		{
 
 		}*/
-
+		array[0] = static_path(array[0], env_string);
 		if (fork() == 0)
 			execve(array[0], array, NULL);
 		else

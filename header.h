@@ -21,6 +21,7 @@ void handler(int sig_num);
 */
 char *_strcat(char *dest, char *src);
 char *_getenv(char *name);
-char *static_path(char *user_command);
+char *static_path(char *user_command, char *env_string);
+char *cmd_cpy(char *dest, char *src, char *usr_cmd);
 
 #endif /* HEADER_H */

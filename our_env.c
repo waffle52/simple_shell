@@ -11,7 +11,7 @@ char *_getenv(char *name)
   while (name[length])
     length++;
 
-  environ_string = malloc (sizeof(char) * length);
+  environ_string = malloc(sizeof(char) * length);
   for (i = 0; environ[i] != NULL; i++)
     {
       j = 0;
@@ -20,7 +20,6 @@ char *_getenv(char *name)
 	  environ_string[j] = environ[i][j];
 	  j++;
 	}
-
       if (_strcmp(name, environ_string) == 0)
 	{
 	  token = strtok(environ[i], "=");
