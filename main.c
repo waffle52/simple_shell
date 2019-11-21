@@ -9,9 +9,9 @@ int main(void)
 	char *commandcopy = NULL, *token;
 	char delim[] = " ";
 	int status = 0;
-
+	/*
 	(void) signal(SIGINT, handler);
-
+	*/
 	while(1)
 	{
 

@@ -16,7 +16,9 @@ char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
 int _atoi(char *s);
 int _strcmp(char *s1, char *s2);
+/*
 void handler(int sig_num);
+*/
 char *_strcat(char *dest, char *src);
 char *_getenv(char *name);
 char *static_path(char *user_command);

@@ -85,13 +85,13 @@ int _atoi(char *s)
 
 	return (value * sign);
 }
-
+/*
 void handler(int sig_num)
 {
         signal(sig_num, SIG_IGN);
 	signal(SIGINT, handler);
 }
-
+*/
 /**
  * _strcmp - Entry point
  * @s1: value of char
