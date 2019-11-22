@@ -3,14 +3,12 @@
 int our_cd(char *path)
 {
 	char *hold;
-	char *lastpwd;
 	int ret;
 
 /*cd by itself still doesn't work?? */
        	if (path == NULL || _strcmp(path, "~") == 0)
        	{
 /* goal: old directory before you change directory */
-		lastpwd = getcwd(_getenv(path));
        		ret = chdir(_getenv("HOME"));
        		return(ret);
        	}
