@@ -3,25 +3,43 @@
 int our_cd(char *path)
 {
 	char *hold;
+	char *lastpwd;
 	int ret;
 
-       	if (path == NULL)
+/*cd by itself still doesn't work?? */
+       	if (path == NULL || _strcmp(path, "~") == 0)
        	{
-       		hold = _getenv("HOME");
-       		ret = chdir(hold);
+/* goal: old directory before you change directory */
+		lastpwd = getcwd(_getenv(path));
+       		ret = chdir(_getenv("HOME"));
        		return(ret);
        	}
        	else if (_strcmp(path, "..") == 0)
        	{
-       		hold = handledotdot("OLDPWD");
-		ret = chdir(hold);
-       		return(ret);
+		ret = chdir("..");
+		return (ret);
        	}
        	else if (_strcmp(path,"-") == 0)
        	{
-       		hold = _getenv("OLDPWD");
-       		ret = chdir(hold);
-       		return(ret);
+/* added if it is not null, to go ahead! */
+		if (_getenv("OLDPWD") != NULL)
+		{
+			hold = _getenv("OLDPWD");
+/* need to update environment's cd and pwd */
+
+			ret = chdir(hold);
+
+
+			return(ret);
+		}
+/*		else */
+/*else you just stay in the same working directory? */
+/*		{
+			perror("OLDPWD is not set\n");
+			hold = _getenv("PWD");
+			ret = chdir(hold);
+			return (ret);
+		}   */
        	}
        	else if (_strcmp(path,".") == 0)
        	{
@@ -41,34 +59,4 @@ int our_cd(char *path)
 			perror("cd failed");
        	}
 	return (0);
-}
-/*      cd ..     */
-char *handledotdot(char *path)
-{
-	int i;
-	char *original = path;
-	char *dup;
-	char *token;
-	int numtoks;
-
-	original = _getenv("OLDPWD");
-	dup = _strdup(original);
-
-	token = strtok(dup, "/");
-	numtoks = 0;
-	while(token != NULL)
-	{
-		token = strtok(NULL, "/");
-		numtoks++;
-	}
-	numtoks = numtoks - 1;
-
-	token = strtok(original, "/");
-
-	i = 0;
-	while(i < numtoks)
-	{
-		token = strtok(NULL, "/");
-	}
-	return (token);
 }
