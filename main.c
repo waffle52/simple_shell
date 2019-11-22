@@ -10,11 +10,13 @@ int main(int argc, char *argv[], char **env_cmd)
 	char delim[] = " ";
 	int status = 0;
 	char *env_string = NULL;
+	pid_t pid;
 	(void)argc, (void)argv;
-	/*
-	(void) signal(SIGINT, handler);
-	*/
+
+	signal(SIGINT, SIG_IGN);
+
 	env_string = _getenv("PATH");
+
 	while(1)
 	{
 
@@ -52,7 +54,7 @@ int main(int argc, char *argv[], char **env_cmd)
 		}
 		array[i] = NULL;
 
-		if (_strcmp("exit", array[0]) == 0)
+		if (array[0] != NULL && _strcmp("exit", array[0]) == 0)
 		{
 
 			if (array[1] != NULL)
@@ -64,18 +66,30 @@ int main(int argc, char *argv[], char **env_cmd)
 			free(commandcopy);
 			free(array);
 
-		        exit(status);
+		        pid = fork();
+			while(pid != 1)
+			{
+				_exit(status);
+			}
 		}
 
-		if (_strcmp("cd", array[0]) == 0)
+		if (array[0] != NULL && _strcmp("cd", array[0]) == 0)
 		{
 			our_cd (array[1]);
 		}
-		if (_strcmp("env", array[0]) == 0)
+		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
 			showenv(env_cmd);
+
+		if (array[0] != NULL)
+		{
 		array[0] = static_path(array[0], env_string);
+		}
+
 		if (fork() == 0)
+		{
 			execve(array[0], array, NULL);
+			exit(status);
+		}
 		else
 			wait(NULL);
 
