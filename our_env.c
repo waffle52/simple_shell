@@ -1,8 +1,6 @@
 #include "header.h"
 
-extern char** environ;
-
-char *_getenv(char *name)
+char *_getenv(char *name, char **environ)
 {
   int i, j, length = 0;
   char *token = NULL;

@@ -15,7 +15,7 @@ int main(int argc, char *argv[], char **env_cmd)
 
 	signal(SIGINT, SIG_IGN);
 
-	env_string = _getenv("PATH");
+	env_string = _getenv("PATH", env_cmd);
 
 	while(1)
 	{
@@ -75,7 +75,7 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		if (array[0] != NULL && _strcmp("cd", array[0]) == 0)
 		{
-			our_cd (array[1]);
+			our_cd (array[1], env_cmd);
 		}
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
 			showenv(env_cmd);

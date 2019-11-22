@@ -20,10 +20,10 @@ int _strcmp(char *s1, char *s2);
 void handler(int sig_num);
 */
 char *_strcat(char *dest, char *src);
-char *_getenv(char *name);
+char *_getenv(char *name, char **);
 char *static_path(char *user_command, char *env_string);
 char *cmd_cpy(char *dest, char *src, char *usr_cmd);
-int our_cd(char *path);
+int our_cd(char *path, char **);
 char *handledotdot(char *path);
 void showenv(char **envp);
 #endif /* HEADER_H */

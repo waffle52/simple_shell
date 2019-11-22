@@ -1,6 +1,6 @@
 #include "header.h"
 
-int our_cd(char *path)
+int our_cd(char *path, char **environ)
 {
 	char *hold;
 	int ret;
@@ -9,7 +9,7 @@ int our_cd(char *path)
        	if (path == NULL || _strcmp(path, "~") == 0)
        	{
 /* goal: old directory before you change directory */
-       		ret = chdir(_getenv("HOME"));
+		ret = chdir(_getenv("HOME", environ));
        		return(ret);
        	}
        	else if (_strcmp(path, "..") == 0)
@@ -20,9 +20,9 @@ int our_cd(char *path)
        	else if (_strcmp(path,"-") == 0)
        	{
 /* added if it is not null, to go ahead! */
-		if (_getenv("OLDPWD") != NULL)
+		if (_getenv("OLDPWD", environ) != NULL)
 		{
-			hold = _getenv("OLDPWD");
+			hold = _getenv("OLDPWD", environ);
 /* need to update environment's cd and pwd */
 
 			ret = chdir(hold);
@@ -41,7 +41,7 @@ int our_cd(char *path)
        	}
        	else if (_strcmp(path,".") == 0)
        	{
-       		hold = _getenv("PWD");
+		hold = _getenv("PWD", environ);
 		ret = chdir(hold);
        		return(ret);
        	}

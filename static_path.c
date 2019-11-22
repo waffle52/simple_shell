@@ -1,7 +1,5 @@
 #include "header.h"
 
-extern char **environ;
-
 char *cmd_cpy(char *dest, char *src, char *usr_cmd)
 {
 	int i, j;
