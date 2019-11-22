@@ -1,6 +1,6 @@
 #include "header.h"
 
-int main(void)
+int main(int argc, char *argv[], char **env_cmd)
 {
 	char *command = NULL;
 	size_t command_size = 0;
@@ -10,6 +10,7 @@ int main(void)
 	char delim[] = " ";
 	int status = 0;
 	char *env_string = NULL;
+	(void)argc, (void)argv;
 	/*
 	(void) signal(SIGINT, handler);
 	*/
@@ -70,6 +71,8 @@ int main(void)
 		{
 			our_cd (array[1]);
 		}
+		if (_strcmp("env", array[0]) == 0)
+			showenv(env_cmd);
 		array[0] = static_path(array[0], env_string);
 		if (fork() == 0)
 			execve(array[0], array, NULL);

@@ -12,6 +12,9 @@ char *_getenv(char *name)
     length++;
 
   environ_string = malloc(sizeof(char) * length);
+  if (environ_string == NULL)
+    return (NULL);
+
   for (i = 0; environ[i] != NULL; i++)
     {
       j = 0;
@@ -24,6 +27,7 @@ char *_getenv(char *name)
 	{
 	  token = strtok(environ[i], "=");
 	  token = strtok(NULL, "=");
+	  free(environ_string);
 	  return (token);
 	}
     }

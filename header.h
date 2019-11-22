@@ -25,5 +25,5 @@ char *static_path(char *user_command, char *env_string);
 char *cmd_cpy(char *dest, char *src, char *usr_cmd);
 int our_cd(char *path);
 char *handledotdot(char *path);
-
+void showenv(char **envp);
 #endif /* HEADER_H */
