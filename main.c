@@ -29,7 +29,7 @@ int main(int argc, char *argv[], char **env_cmd)
 			write(STDOUT_FILENO, "$ ", 2);
 			write(STDOUT_FILENO, "\n", 1);
 			free(command);
-			exit(EXIT_SUCCESS);
+			break;
 		}
 
 		for(i = 0; command[i]; i++)
@@ -72,6 +72,7 @@ int main(int argc, char *argv[], char **env_cmd)
 			free(command);
 			free(commandcopy);
 			free(array);
+			freeAll(&mine);
 
 		        pid = fork();
 			while(pid != 1)

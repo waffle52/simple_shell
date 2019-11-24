@@ -30,4 +30,5 @@ int our_cd(char *path, char **environ);
 char *handledotdot(char *path);
 void showenv(char **envp);
 void freeAll(struct data *d);
+char *get_env_value(char *str, char *delim);
 #endif /* HEADER_H */

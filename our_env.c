@@ -1,37 +1,70 @@
 #include "header.h"
 
+/**
+ * freeAll - Function that frees malloc'd variables in
+ * other functions where freeing would cause errors
+ * @d: Struct holding locations of malloc'd variables
+ * Return: Nothing
+ */
+void freeAll(struct data *d)
+{
+  printf("Freeing stuff~\n");
+	free(d->token2);
+	free(d->buffer);
+}
+
+/**
+ * get_env_value - Function that takes an environment variable
+ * string and extracts the value in the variable
+ * @str: String to be strtok'd
+ * @delim: Characters where strtok should split the string at
+ * Return: The value of the environmental variable
+ */
+char *get_env_value(char *str, char *delim)
+{
+	str = strtok(str, delim);
+	str = strtok(NULL, delim);
+
+	return (str);
+}
+
+/**
+ * _getenv - Custom version of getenv. Searches for
+ * environmental variable in the given list
+ * @name: Name of variable to search for
+ * @environ: Environmental variable list, passed from main
+ * Return: The pointer to the variable, if found, or NULL if not found
+ */
 char *_getenv(char *name, char **environ)
 {
-  int i, j, length = 0;
-  char *token = NULL;
-  char *environ_string = NULL;
+	int i, j, length = 0;
+	char *environ_string = NULL;
 
-  while (name[length])
-    length++;
+	while (name[length])
+		length++;
 
-  environ_string = malloc(sizeof(char) * length + 1);
-  if (environ_string == NULL)
-  {
-	  free(environ_string);
-	  return (NULL);
-  }
-
-  for (i = 0; environ[i] != NULL; i++)
-    {
-      j = 0;
-      while (j < length)
+	environ_string = malloc(sizeof(char) * length + 1);
+	if (environ_string == NULL)
 	{
-	  environ_string[j] = environ[i][j];
-	  j++;
+		free(environ_string);
+		return (NULL);
 	}
-      if (_strcmp(name, environ_string) == 0)
+
+	for (i = 0; environ[i] != NULL; i++)
 	{
-	  token = strtok(environ[i], "=");
-	  token = strtok(NULL, "=");
-	  free(environ_string);
-	  return (token);
+		j = 0;
+		while (j < length)
+		{
+			environ_string[j] = environ[i][j];
+			j++;
+		}
+		if (_strcmp(name, environ_string) == 0)
+		{
+			free(environ_string);
+			return (environ[i]);
+		}
 	}
-    }
-  free(environ_string);
-  return (NULL);
+
+	free(environ_string);
+	return (NULL);
 }

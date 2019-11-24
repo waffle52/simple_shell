@@ -1,60 +1,46 @@
 #include "header.h"
 
+/**
+ * our_cd - Custom version of cd. Allows user to move between
+ * directories depending on the argument passed alongside cd
+ * @path: The argument after cd that determines where to move
+ * @environ: Environmental variable list, passed from main
+ * Return: 0 if successfully moved, -1 otherwise
+ */
 int our_cd(char *path, char **environ)
 {
 	char *hold;
-	int ret;
 
-/*cd by itself still doesn't work?? */
-       	if (path == NULL || _strcmp(path, "~") == 0)
-       	{
-/* goal: old directory before you change directory */
-		ret = chdir(_getenv("HOME", environ));
-       		return(ret);
-       	}
-       	else if (_strcmp(path, "..") == 0)
-       	{
-		ret = chdir("..");
-		return (ret);
-       	}
-       	else if (_strcmp(path,"-") == 0)
-       	{
-/* added if it is not null, to go ahead! */
+	if (path == NULL || (_strcmp(path, "~") == 0))
+	{
+		hold = _getenv("HOME", environ);
+		hold = get_env_value(hold, "=");
+		return (chdir(hold));
+	}
+	else if (_strcmp(path, "..") == 0)
+		return (chdir(".."));
+	else if (_strcmp(path, "-") == 0)
+	{
 		if (_getenv("OLDPWD", environ) != NULL)
 		{
 			hold = _getenv("OLDPWD", environ);
-/* need to update environment's cd and pwd */
-
-			ret = chdir(hold);
-
-
-			return(ret);
+			hold = get_env_value(hold, "=");
+			return (chdir(hold));
 		}
-/*		else */
-/*else you just stay in the same working directory? */
-/*		{
-			perror("OLDPWD is not set\n");
-			hold = _getenv("PWD");
-			ret = chdir(hold);
-			return (ret);
-		}   */
-       	}
-       	else if (_strcmp(path,".") == 0)
-       	{
+	}
+	else if (_strcmp(path, ".") == 0)
+	{
 		hold = _getenv("PWD", environ);
-		ret = chdir(hold);
-       		return(ret);
-       	}
-/* for all others with absolute or relative path */
-       	else
-       	{
+		hold = get_env_value(hold, "=");
+		return (chdir(hold));
+	}
+	else
+	{
 		if (access(path, F_OK) == 0)
-		{
-			ret = chdir(path);
-			return (ret);
-		}
+			return (chdir(path));
+
 		else
 			perror("cd failed");
-       	}
-	return (0);
+	}
+	return (-1);
 }

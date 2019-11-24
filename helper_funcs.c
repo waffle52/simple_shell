@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header.h"
+
 /**
  * _strlen - Return the length of a string
  * @s: string
@@ -17,6 +18,7 @@ int _strlen(char *s)
 	}
 	return (slen);
 }
+
 /**
  * _strcpy - copy a string to a new destination
  * @dest: destination of copied string
@@ -36,9 +38,11 @@ char *_strcpy(char *dest, char *src)
 	*dest = '\0';
 	return (start);
 }
+
 /**
  * _strdup - duplicates as string
  * @str: string to duplicate
+ * @d: Struct. For holding address to buffer for freeing later
  * Return: copied string or NULL if fail
  */
 char *_strdup(char *str, struct data *d)
@@ -59,7 +63,6 @@ char *_strdup(char *str, struct data *d)
  * @s: string to convert
  * Return: integers, 0 if none
  */
-
 int _atoi(char *s)
 {
 	unsigned int value = 0;
@@ -91,7 +94,6 @@ int _atoi(char *s)
  * Description: compares two strings)?
  * Return: int
  */
-
 int _strcmp(char *s1, char *s2)
 {
 	int i, m;
@@ -113,10 +115,4 @@ int _strcmp(char *s1, char *s2)
 	}
 
 	return (m);
-}
-
-void freeAll(struct data *d)
-{
-	free(d->token2);
-	free(d->buffer);
 }
