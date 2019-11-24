@@ -8,11 +8,12 @@
 
 ## What our simple shell does
 
+* Displays our prompt: `$` and waits for the user to type a command
 * Takes in input from the command line and outputs the same results
 as sh (/bin/sh)
+* Displays the prompt each time a command has been executed
 * Prints associated error messagess
 * * _----- wht else does the shell do
-
 
 ---
 
@@ -56,12 +57,12 @@ as sh (/bin/sh)
 |write (man 2 write)|
 
 ---
-## Uses
+## Directions
 
 * Compile all created source code .c files in this repository along with the
 header
 ```header.h```
-file and launch the executable file.
+file and launch the executable file to start your own shell
 
 Example ```./hsh```:
 ```
@@ -80,7 +81,7 @@ exit | exits the shell
 env | prints the current environment
 cd | changes the current directory of the process
 ^C | man the signal
-# | handles comments
+\# | handles comments
 
 ---
 ```ls```:
