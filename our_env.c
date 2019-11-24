@@ -9,9 +9,12 @@ char *_getenv(char *name, char **environ)
   while (name[length])
     length++;
 
-  environ_string = malloc(sizeof(char) * length);
+  environ_string = malloc(sizeof(char) * length + 1);
   if (environ_string == NULL)
-    return (NULL);
+  {
+	  free(environ_string);
+	  return (NULL);
+  }
 
   for (i = 0; environ[i] != NULL; i++)
     {

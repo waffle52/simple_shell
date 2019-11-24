@@ -16,28 +16,27 @@ char *cmd_cpy(char *dest, char *src, char *usr_cmd)
 	return (dest);
 }
 
-char *static_path(char *user_command, char *env_string)
+char *static_path(char *user_command, char *env_string, struct data *d)
 {
 	char *token = NULL;
-	char *token2 = NULL;
 	char *dupe_str = NULL;
 	int i;
 
-	dupe_str = _strdup(env_string);
+	dupe_str = _strdup(env_string, d);
 	token = strtok(dupe_str, ":");
 
 	while (token != NULL)
 	{
-		token2 = malloc(sizeof(char) * (_strlen(token) + _strlen(user_command) + 1));
+		d->token2 = malloc(sizeof(char) * (_strlen(token) + _strlen(user_command) + 2));
 		for (i = 0; i < (_strlen(token) + _strlen(user_command) + 1); i++)
-			token2[i] = '\0';
-		cmd_cpy(token2, token, user_command);
+			d->token2[i] = '\0';
+		cmd_cpy(d->token2, token, user_command);
 
-		if (access(token2, F_OK) == 0)
-			return (token2);
+		if (access(d->token2, F_OK) == 0)
+			return (d->token2);
 
 		token = strtok(NULL, ":");
-		free(token2);
+		free(d->token2);
 	}
 	return (user_command);
 }

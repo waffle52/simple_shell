@@ -20,6 +20,8 @@ int main(int argc, char *argv[], char **env_cmd)
 	while(1)
 	{
 
+		struct data mine;
+
 		commandnum = 0;
 		command_size = 0;
 		write(STDOUT_FILENO,"$ ",2);
@@ -32,7 +34,7 @@ int main(int argc, char *argv[], char **env_cmd)
 				command[i] = '\0';
 		}
 
-	        commandcopy = _strdup(command);
+	        commandcopy = _strdup(command, &mine);
 
 		token = strtok(commandcopy, delim);
 
@@ -77,12 +79,13 @@ int main(int argc, char *argv[], char **env_cmd)
 		{
 			our_cd (array[1], env_cmd);
 		}
+
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
 			showenv(env_cmd);
 
 		if (array[0] != NULL)
 		{
-		array[0] = static_path(array[0], env_string);
+			array[0] = static_path(array[0], env_string, &mine);
 		}
 
 		if (fork() == 0)
@@ -96,6 +99,7 @@ int main(int argc, char *argv[], char **env_cmd)
 		free(command);
 		free(commandcopy);
 		free(array);
+		freeAll(&mine);
 		fflush(stdin);
 
 		command = NULL;

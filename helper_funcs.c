@@ -41,19 +41,17 @@ char *_strcpy(char *dest, char *src)
  * @str: string to duplicate
  * Return: copied string or NULL if fail
  */
-char *_strdup(char *str)
+char *_strdup(char *str, struct data *d)
 {
-	char *buffer;
-
 	if (str == NULL)
 		return (NULL);
 
-	buffer = malloc(_strlen(str) + 1);
-	if (buffer == NULL)
+	d->buffer = malloc(sizeof(char *) * (_strlen(str) + 1));
+	if (d->buffer == NULL)
 		return (NULL);
 
-	_strcpy(buffer, str);
-	return (buffer);
+	_strcpy(d->buffer, str);
+	return (d->buffer);
 }
 
 /**
@@ -85,13 +83,7 @@ int _atoi(char *s)
 
 	return (value * sign);
 }
-/*
-void handler(int sig_num)
-{
-        signal(sig_num, SIG_IGN);
-	signal(SIGINT, handler);
-}
-*/
+
 /**
  * _strcmp - Entry point
  * @s1: value of char
@@ -123,3 +115,8 @@ int _strcmp(char *s1, char *s2)
 	return (m);
 }
 
+void freeAll(struct data *d)
+{
+	free(d->token2);
+	free(d->buffer);
+}
