@@ -8,23 +8,29 @@ int main(int argc, char *argv[], char **env_cmd)
 	char **array;
 	char *commandcopy = NULL, *token;
 	char delim[] = " ";
-	int status = 0;
+	int status = 0, run = 0;
 	char *env_string = NULL;
 	pid_t pid;
 	struct data mine;
 	(void)argc, (void)argv;
 
 	signal(SIGINT, SIG_IGN);
-
 	env_string = _getenv("PATH", env_cmd);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
 
-	while(1)
+	while((run = getline(&command, &command_size, stdin)))
 	{
 		commandnum = 0;
 		command_size = 0;
-		write(STDOUT_FILENO,"$ ",2);
 
-		getline(&command, &command_size, stdin);
+		if (run == EOF)
+		{
+			write(STDOUT_FILENO, "$ ", 2);
+			write(STDOUT_FILENO, "\n", 1);
+			free(command);
+			exit(EXIT_SUCCESS);
+		}
 
 		for(i = 0; command[i]; i++)
 		{
@@ -101,6 +107,8 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		command = NULL;
 		commandcopy = NULL;
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 	}
 	freeAll(&mine);
 	return(0);
