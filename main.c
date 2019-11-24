@@ -72,7 +72,6 @@ int main(int argc, char *argv[], char **env_cmd)
 			free(command);
 			free(commandcopy);
 			free(array);
-			freeAll(&mine);
 
 		        pid = fork();
 			while(pid != 1)
@@ -92,6 +91,7 @@ int main(int argc, char *argv[], char **env_cmd)
 		if (array[0] != NULL)
 		{
 			array[0] = static_path(array[0], env_string, &mine);
+			freeAll(&mine);
 		}
 
 		if (fork() == 0)
