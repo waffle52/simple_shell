@@ -11,6 +11,7 @@ int main(int argc, char *argv[], char **env_cmd)
 	int status = 0;
 	char *env_string = NULL;
 	pid_t pid;
+	struct data mine;
 	(void)argc, (void)argv;
 
 	signal(SIGINT, SIG_IGN);
@@ -19,9 +20,6 @@ int main(int argc, char *argv[], char **env_cmd)
 
 	while(1)
 	{
-
-		struct data mine;
-
 		commandnum = 0;
 		command_size = 0;
 		write(STDOUT_FILENO,"$ ",2);
@@ -99,11 +97,11 @@ int main(int argc, char *argv[], char **env_cmd)
 		free(command);
 		free(commandcopy);
 		free(array);
-		freeAll(&mine);
 		fflush(stdin);
 
 		command = NULL;
 		commandcopy = NULL;
 	}
+	freeAll(&mine);
 	return(0);
 }
