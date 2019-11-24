@@ -38,6 +38,7 @@ int main(int argc, char *argv[], char **env_cmd)
 				command[i] = '\0';
 		}
 
+		command = strtok(command, "#");
 	        commandcopy = _strdup(command, &mine);
 
 		token = strtok(commandcopy, delim);
