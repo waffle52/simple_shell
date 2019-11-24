@@ -26,7 +26,7 @@ char *_strcat(char *dest, char *src);
 char *_getenv(char *name, char **);
 char *static_path(char *user_command, char *env_string, struct data *d);
 char *cmd_cpy(char *dest, char *src, char *usr_cmd);
-int our_cd(char *path, char **);
+int our_cd(char *path, char **environ);
 char *handledotdot(char *path);
 void showenv(char **envp);
 void freeAll(struct data *d);
