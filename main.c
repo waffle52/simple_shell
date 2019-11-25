@@ -99,7 +99,6 @@ int main(int argc, char *argv[], char **env_cmd)
 		if (fork() == 0)
 		{
 			execve(array[0], array, NULL);
-			free(mine.token2);
 			exit(status);
 		}
 		else
