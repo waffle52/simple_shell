@@ -26,10 +26,8 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		if (run == EOF)
 		{
-			write(STDOUT_FILENO, "$ ", 2);
-			write(STDOUT_FILENO, "\n", 1);
 			free(command);
-			break;
+			exit(EXIT_SUCCESS);
 		}
 
 		for(i = 0; command[i]; i++)
@@ -86,17 +84,22 @@ int main(int argc, char *argv[], char **env_cmd)
 		}
 
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
+		{
 			showenv(env_cmd);
+		}
 
 		if (array[0] != NULL)
 		{
 			array[0] = static_path(array[0], env_string, &mine);
-			freeAll(&mine);
+
+			free(mine.buffer);
+			/* needed to free exact amount but stops program from working free(mine.token2); */
 		}
 
 		if (fork() == 0)
 		{
 			execve(array[0], array, NULL);
+			free(mine.token2);
 			exit(status);
 		}
 		else
@@ -112,6 +115,6 @@ int main(int argc, char *argv[], char **env_cmd)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 	}
-	freeAll(&mine);
+        freeAll(&mine);
 	return(0);
 }

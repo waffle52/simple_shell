@@ -52,6 +52,7 @@ char *static_path(char *user_command, char *env_string, struct data *d)
 
 		if (access(d->token2, F_OK) == 0)
 			return (d->token2);
+		/* memory error occurs because of above */
 
 		token = strtok(NULL, ":");
 		free(d->token2);
