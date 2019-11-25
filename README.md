@@ -13,7 +13,6 @@
 as sh (/bin/sh)
 * Displays the prompt each time a command has been executed
 * Prints associated error messages
-* * _----- wht else does the shell do
 
 ---
 
@@ -60,14 +59,14 @@ as sh (/bin/sh)
 ## Files Created
 
 | Name of File | Description |
-| — | —|
-[header.h](https://github.com/waffle52/simple_shell/blob/master/header.h) | Holds libraries and prototypes |
-[main.c](https://github.com/waffle52/simple_shell/blob/master/main.c) | main driving file|
-[our_env.c](https://github.com/waffle52/simple_shell/blob/master/our_env.c) | function that gets the environmental variable and parses through them|
-[showenv.c](https://github.com/waffle52/simple_shell/blob/master/showenv.c) | function that shows the environmental variable |
-[our_cd.c](https://github.com/waffle52/simple_shell/blob/master/our_cd.c) | function that implements the built in cd function along with multiple options| 
-[helper_functions.c](https://github.com/waffle52/simple_shell/blob/master/helper_funcs.c) | string manipulation along with free function |
-[static_path.c](https://github.com/waffle52/simple_shell/blob/master/static_path.c)| determines if user input is a valid command by searching all directories in PATH |
+| --- | --- |
+|[header.h](https://github.com/waffle52/simple_shell/blob/master/header.h) | Holds libraries and prototypes |
+|[main.c](https://github.com/waffle52/simple_shell/blob/master/main.c) | main driving file|
+|[our_env.c](https://github.com/waffle52/simple_shell/blob/master/our_env.c) | function that gets the environmental variable and parses through them|
+|[showenv.c](https://github.com/waffle52/simple_shell/blob/master/showenv.c) | function that shows the environmental variable |
+|[our_cd.c](https://github.com/waffle52/simple_shell/blob/master/our_cd.c) | function that implements the built in cd function along with multiple options| 
+|[helper_functions.c](https://github.com/waffle52/simple_shell/blob/master/helper_funcs.c) | string manipulation along with free function |
+|[static_path.c](https://github.com/waffle52/simple_shell/blob/master/static_path.c)| determines if user input is a valid command by searching all directories in PATH |
 
 * Compile all created source code .c files in this repository along with the
 header
@@ -96,6 +95,7 @@ cd | changes the current directory of the process
 
 ---
 ```ls```:
+
 Output:
 ```
 $
@@ -105,7 +105,7 @@ $
 ```
 ---
 ```ls -l ```:
-Output:
+
 ```
 $
 $ ls -l
@@ -124,7 +124,6 @@ $
 ---
 ```ls -l -a```:
 
-Output:
 ```
 $
 $ ls -l -a
@@ -145,7 +144,7 @@ $
 ```
 ---
 ```Ctrl + D```:
-Output:
+
 ```
 $
 $ #User types in Ctrl + D here
@@ -154,7 +153,7 @@ $ # program exited
 ---
 
 ```exit```:
-Output:
+
 ```
 $
 $ #User types in exit here
@@ -165,7 +164,6 @@ $
 
 ```env```:
 
-Output:
 ```
 $
 $ env
@@ -196,7 +194,7 @@ $
 ___
 
 ```pwd```:
-Output:
+
 ```
 $
 $ pwd
@@ -206,7 +204,6 @@ $
 ---
 ```cd ..```:
 
-Output:
 ```
 $
 $ cd ..
@@ -218,7 +215,6 @@ $
 
 ```cd```:
 
-Output:
 ```
 $
 $ cd
@@ -230,7 +226,6 @@ $
 
 ```cd simple_shell```:
 
-Output:
 ```
 $
 $ cd simple_shell
@@ -241,7 +236,6 @@ $
 ---
 ```^C```:
 
-Output:
 ```
 $
 $ ^C
@@ -255,7 +249,6 @@ $
 ---
 ```#```:
 
-Output:
 ```
 $
 $ ls # do you see this
