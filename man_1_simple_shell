@@ -11,11 +11,11 @@ simple_shell is a sh-compatible command line interpreter that executes commmand'
 
 .SH Parameters
 Shell Variables
-PWD
+PWD,
 The current working directory that is set by cd.
-PATH
+PATH,
 The search PATH searches for commands
-PS1
+PS1,
 This parameter is expanded and used as the primary prompt string.
 
 .SH Readline
