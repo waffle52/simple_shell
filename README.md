@@ -96,7 +96,6 @@ cd | changes the current directory of the process
 ---
 ```ls```:
 
-Output:
 ```
 $
 $ ls
@@ -147,8 +146,8 @@ $
 
 ```
 $
-$ #User types in Ctrl + D here
-$ # program exited
+$ (User types in Ctrl + D here)
+$ (Program has exited)
 ```
 ---
 
@@ -156,8 +155,8 @@ $ # program exited
 
 ```
 $
-$ #User types in exit here
-$ # program exited
+$ (User types in exit here)
+$ (Program has exited)
 $
 ```
 ---
