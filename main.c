@@ -81,6 +81,7 @@ int main(int argc, char *argv[], char **env_cmd)
 		if (array[0] != NULL && _strcmp("cd", array[0]) == 0)
 		{
 			our_cd (array[1], env_cmd);
+			
 		}
 
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
@@ -90,6 +91,7 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		if (array[0] != NULL)
 		{
+			mine.buffer = NULL;
 			array[0] = static_path(array[0], env_string, &mine);
 
 			free(mine.buffer);
