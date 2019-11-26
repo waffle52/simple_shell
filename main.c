@@ -82,7 +82,7 @@ int main(int argc, char *argv[], char **env_cmd)
 		if (array[0] != NULL && _strcmp("cd", array[0]) == 0)
 		{
 			our_cd (array[1], env_cmd);
-			
+
 		}
 
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
@@ -104,7 +104,12 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		if (fork() == 0)
 		{
-			execve(array[0], array, NULL);
+			if ((execve(array[0], array, NULL) == -1))
+				{
+					write(STDERR_FILENO, array[0], _strlen(array[0]));
+					write(STDERR_FILENO, ": command not found\n", 21);
+
+				}
 			exit(status);
 		}
 		else
