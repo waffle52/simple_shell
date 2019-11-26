@@ -32,4 +32,7 @@ void showenv(char *args, char **environ);
 void show_only_env(char **environ);
 void freeAll(struct data *d);
 char *get_env_value(char *str, char *delim);
+void atty();
+void freeAndFlush(char *command, char *commandcopy, char **array);
+
 #endif /* HEADER_H */
