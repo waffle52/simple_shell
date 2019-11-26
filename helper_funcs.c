@@ -3,9 +3,9 @@
 #include "header.h"
 
 /**
- * _strlen - Return the length of a string
- * @s: string
- * Return: string length i
+ * _strlen - Function that return the length of a string
+ * @s: String to be counted
+ * Return: The length of the string
  */
 int _strlen(char *s)
 {
@@ -20,9 +20,9 @@ int _strlen(char *s)
 }
 
 /**
- * _strcpy - copy a string to a new destination
- * @dest: destination of copied string
- * @src: string to copy
+ * _strcpy - Function that copies a string from src to dest
+ * @dest: Destination string
+ * @src: String to be copied
  * Return: Pointer to destination
  */
 char *_strcpy(char *dest, char *src)
@@ -40,10 +40,10 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - duplicates as string
- * @str: string to duplicate
+ * _strdup - Function that duplicates a string
+ * @str: String to duplicate
  * @d: Struct. For holding address to buffer for freeing later
- * Return: copied string or NULL if fail
+ * Return: The copied string, or NULL if fail
  */
 char *_strdup(char *str, struct data *d)
 {
@@ -59,9 +59,9 @@ char *_strdup(char *str, struct data *d)
 }
 
 /**
- * _atoi - converts a string to an integer
+ * _atoi - Function that converts a string to an integer
  * @s: string to convert
- * Return: integers, 0 if none
+ * Return: The string as an integer, or 0 if none
  */
 int _atoi(char *s)
 {
@@ -88,11 +88,12 @@ int _atoi(char *s)
 }
 
 /**
- * _strcmp - Entry point
- * @s1: value of char
- * @s2: value of char
- * Description: compares two strings)?
- * Return: int
+ * _strcmp - Function that compares two strings
+ * and attempts to find a match
+ * @s1: First string to compare
+ * @s2: Second string to compare
+ * Return: 0 if the two strings are exactly identical, or any value
+ * otherwise
  */
 int _strcmp(char *s1, char *s2)
 {
