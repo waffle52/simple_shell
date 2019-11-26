@@ -2,22 +2,18 @@
 
 int main(int argc, char *argv[], char **env_cmd)
 {
-	char *command = NULL;
-	size_t command_size = 0;
-	size_t commandnum = 0, i = 0;
+	char *command = NULL, *env_string = NULL, *commandcopy = NULL, *token;
+	size_t command_size = 0, commandnum = 0, i = 0;
 	char **array;
-	char *commandcopy = NULL, *token;
 	char delim[] = " ";
 	int status = 0, run = 0;
-	char *env_string = NULL;
 	pid_t pid;
 	struct data mine;
 	(void)argc, (void)argv;
 
 	signal(SIGINT, SIG_IGN);
 	env_string = _getenv("PATH", env_cmd);
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "$ ", 2);
+	atty();
 
 	while((run = getline(&command, &command_size, stdin)))
 	{
@@ -67,11 +63,7 @@ int main(int argc, char *argv[], char **env_cmd)
 				if (*(array[1]) <= '9' && *(array[1]) >= '0')
 					status = _atoi(array[1]);
 			}
-
-			free(command);
-			free(commandcopy);
-			free(array);
-
+			freeAndFlush(command, commandcopy, array);
 		        pid = fork();
 			while(pid != 1)
 			{
@@ -115,16 +107,26 @@ int main(int argc, char *argv[], char **env_cmd)
 		else
 			wait(NULL);
 
-		free(command);
-		free(commandcopy);
-		free(array);
-		fflush(stdin);
+	        freeAndFlush(command, commandcopy, array);
 
 		command = NULL;
 		commandcopy = NULL;
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+		atty();
 	}
         freeAll(&mine);
 	return(0);
+}
+
+void atty(void)
+{
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
+}
+
+void freeAndFlush(char *command, char *commandcopy, char **array)
+{
+	free(command);
+	free(commandcopy);
+	free(array);
+	fflush(stdin);
 }
