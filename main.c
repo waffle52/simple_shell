@@ -86,7 +86,10 @@ int main(int argc, char *argv[], char **env_cmd)
 
 		if (array[0] != NULL && _strcmp("env", array[0]) == 0)
 		{
-			showenv(env_cmd);
+			if (array[1] != NULL)
+				showenv(array[1], env_cmd);
+			else
+				show_only_env(env_cmd);
 		}
 
 		if (array[0] != NULL)

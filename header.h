@@ -28,7 +28,8 @@ char *static_path(char *user_command, char *env_string, struct data *d);
 char *cmd_cpy(char *dest, char *src, char *usr_cmd);
 int our_cd(char *path, char **environ);
 char *handledotdot(char *path);
-void showenv(char **envp);
+void showenv(char *args, char **environ);
+void show_only_env(char **environ);
 void freeAll(struct data *d);
 char *get_env_value(char *str, char *delim);
 #endif /* HEADER_H */
