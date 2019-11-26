@@ -64,7 +64,8 @@ int main(int argc, char *argv[], char **env_cmd)
 
 			if (array[1] != NULL)
 			{
-				status = _atoi(array[1]);
+				if (*(array[1]) <= '9' && *(array[1]) >= '0')
+					status = _atoi(array[1]);
 			}
 
 			free(command);
