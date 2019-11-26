@@ -8,7 +8,6 @@
  */
 void freeAll(struct data *d)
 {
-  printf("Freeing stuff~\n");
 	free(d->token2);
 	free(d->buffer);
 }
