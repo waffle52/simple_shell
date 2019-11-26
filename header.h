@@ -12,11 +12,14 @@
 #include <sys/wait.h>
 
 /**
- * struct data - Short description
+ * struct data - Struct for bypassing the restriction
+ * forbidding global variables
  * @token2: First member
  * @buffer: Second member
  *
- * Description: Holds data to be easily freed)?
+ * Description: Allows freeing of certain variables in memory
+ * where freeing otherwise would cause errors. This allows for
+ * fixing any possible memory leaks
  */
 
 struct data
