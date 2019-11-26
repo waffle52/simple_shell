@@ -20,7 +20,7 @@ void showenv(char *args, char **environ)
 		length = _strlen(environ[count]);
 		write(STDOUT_FILENO, environ[count], length);
 		if (_strcmp("-0", args) == 0)
-			write(STDOUT_FILENO, '\0', 1);
+			write(STDOUT_FILENO, "\0", 1);
 		else
 			write(STDOUT_FILENO, "\n", 1);
 	}
